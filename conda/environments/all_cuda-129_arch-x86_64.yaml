@@ -7,9 +7,9 @@ channels:
 dependencies:
 - cuda-version=12.9
 - cudf==26.8.*,>=0.0.0a0
-- cupy>=13.6.0
+- cupy>=14.0.1,!=14.1.0
 - networkx>=3.2
-- numpy>=1.23,<3.0
+- numpy>=2.0,<3.0
 - pandas
 - pre-commit
 - pylibcugraph==26.8.*,>=0.0.0a0
