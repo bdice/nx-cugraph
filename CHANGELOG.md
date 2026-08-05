@@ -1,3 +1,16 @@
+# nx-cugraph 26.08.00 (5 Aug 2026)
+
+### 🛠️ Improvements
+* Improve devcontainer startup times by @trxcllnt in https://github.com/rapidsai/nx-cugraph/pull/262
+* Add SECURITY.md by @jameslamb in https://github.com/rapidsai/nx-cugraph/pull/263
+* Build and test with CUDA 13.3.0 by @bdice in https://github.com/rapidsai/nx-cugraph/pull/265
+* Use main shared-workflows branch by @bdice in https://github.com/rapidsai/nx-cugraph/pull/266
+* Update CuPy and NumPy dependency specs by @bdice in https://github.com/rapidsai/nx-cugraph/pull/267
+* Guard CuPy CTK extra for wheel metadata by @bdice in https://github.com/rapidsai/nx-cugraph/pull/268
+
+
+**Full Changelog**: https://github.com/rapidsai/nx-cugraph/compare/v26.08.00a...release/26.08
+
 # nx-cugraph 26.06.00 (3 Jun 2026)
 
 ### 🛠️ Improvements
