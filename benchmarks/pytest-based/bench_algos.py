@@ -12,6 +12,7 @@ import pytest
 from cugraph import datasets
 
 import nx_cugraph as nxcg
+from nx_cugraph import _nxver
 
 ################################################################################
 # Fixtures and params
@@ -381,6 +382,9 @@ def bench_eigenvector_centrality(benchmark, graph_obj, backend_wrapper):
     result = benchmark.pedantic(
         target=backend_wrapper(nx.eigenvector_centrality),
         args=(G,),
+        # On amazon0302, max_iter=100 did not converge for NetworkX or nx-cugraph;
+        # both converged with 150 in testing.
+        kwargs=dict(max_iter=150),
         rounds=rounds,
         iterations=iterations,
         warmup_rounds=warmup_rounds,
@@ -558,12 +562,12 @@ def bench_single_target_shortest_path_length(benchmark, graph_obj, backend_wrapp
         iterations=iterations,
         warmup_rounds=warmup_rounds,
     )
-    # force_unlazy_eval=True forces iterators and other containers to generate
-    # a complete set of results (in order to include any deferred compute or
-    # conversion in the benchmark), but is not needed for this algo in NX 3.3+
-    # since it returns a dict instead of an iterator. Forcing eval does not
-    # change the benchmark timing.
-    assert type(result) is list
+    # NetworkX 3.5+ returns a dict; older versions return an iterator that
+    # force_unlazy_eval materializes to a list.
+    if _nxver >= (3, 5):
+        assert type(result) is dict
+    else:
+        assert type(result) is list
 
 
 def bench_ancestors(benchmark, graph_obj, backend_wrapper):
